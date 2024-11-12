@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { onMount } from 'svelte';
     import { Cloud, Database, Server, Activity, Loader2 } from 'lucide-svelte';
 
@@ -6,19 +6,14 @@
 
     let loading = true;
     let error = null;
-    let stats = {
-        apps: { total: 0, running: 0, crashed: 0 },
-        services: { total: 0, bound: 0 },
-        memory: { used_gb: 0, total_gb: 0, used_percentage: 0 },
-        instances: { total: 0, running: 0, crashed: 0 }
-    };
     let recentApps = [];
     let events = [];
     
+    /** @type {Array<{name: string, state: string, updated_at: string, lifecycle: {data: {stack: string}}}>} */
     let mockApps = [];
-
+    
     function populateMockApps() {
-        for (let i = 2; i <= 500; i++) {
+        for (let i = 1; i <= 500; i++) {
             mockApps.push({
                 name: "CF App "+i.toString(),
                 state: i % 3 === 0 ? 'CRASHED' : i % 2 === 0 ? 'STOPPED' : 'STARTED',
@@ -33,6 +28,13 @@
     }
 
     populateMockApps();
+    
+    let stats = {
+        apps: { total: mockApps.length, running: mockApps.filter(app => app.state === 'STARTED').length, crashed: mockApps.filter(app => app.state === 'CRASHED').length },
+        services: { total: 0, bound: 0 },
+        memory: { used_gb: 0, total_gb: 0, used_percentage: 0 },
+        instances: { total: 0, running: 0, crashed: 0 }
+    };
     
     async function loadDashboardData() {
         try {
