@@ -8,7 +8,7 @@
     let isLoading = false;
     
     // Available options for items per page
-    const itemsPerPageOptions = [25, 30, 40, 50, 100];
+    const itemsPerPageOptions = [25, 30, 40, 50, 100, 1000, 5000];
     
     const stateColors = {
         STARTED: 'text-green-400 bg-green-800',

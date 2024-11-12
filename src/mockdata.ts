@@ -3,7 +3,7 @@ import type { CFApp, CFEvent, CFStats, MemoryData, InstanceData } from './types'
 
 export function generateMockData() {
     // Generate mock apps
-    const mockApps: CFApp[] = Array.from({ length: 500 }, (_, i) => ({
+    const mockApps: CFApp[] = Array.from({ length: 100000 }, (_, i) => ({
         name: `CF App ${i + 1}`,
         state: i % 3 === 0 ? 'CRASHED' : i % 2 === 0 ? 'STOPPED' : 'STARTED',
         updated_at: new Date().toISOString(),
