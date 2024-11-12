@@ -1,32 +1,32 @@
 <script>
-    import { Card, Button, Label, Input, Alert } from 'flowbite-svelte'
-    import { auth } from '../../stores/auth'
+    import { Card, Button, Label, Input, Alert } from 'flowbite-svelte';
+    import { auth } from '../../stores/auth';
     
-    let username = ''
-    let password = ''
-    let loading = false
-    let error = ''
+    let username = '';
+    let password = '';
+    let loading = false;
+    let error = '';
 
     async function handleLogin(e) {
-        e.preventDefault()
-        loading = true
-        error = ''
+        e.preventDefault();
+        loading = true;
+        error = '';
         
         try {
-            await auth.login({ username, password })
+            await auth.login({ username, password });
         } catch (e) {
-            error = e.message
+            error = e.message;
         } finally {
-            loading = false
+            loading = false;
         }
     }
 </script>
 
-<div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
-    <Card class="w-full max-w-md space-y-8">
+<div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-black">
+    <Card class="w-full max-w-md space-y-8 bg-gray-800 text-white">
         <div>
             <img class="mx-auto h-12 w-auto" src="/cf-logo.svg" alt="Cloud Foundry" />
-            <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
+            <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-white">
                 Sign in to your account
             </h2>
         </div>
@@ -48,6 +48,7 @@
                         required
                         bind:value={username}
                         placeholder="Username"
+                        class="bg-gray-700 text-white"
                     />
                 </div>
 
@@ -60,6 +61,7 @@
                         required
                         bind:value={password}
                         placeholder="Password"
+                        class="bg-gray-700 text-white"
                     />
                 </div>
             </div>
@@ -67,8 +69,7 @@
             <div>
                 <Button
                     type="submit"
-                    class="w-full"
-                    color="blue"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white"
                     disabled={loading}
                 >
                     {loading ? 'Signing in...' : 'Sign in'}

@@ -1,3 +1,33 @@
 @import "tailwindcss/base";
+/*
+    EXAMPLES:
+    body {
+        @apply bg-neutral-950 text-gray-300;
+    }
+    
+    h1 {
+        @apply text-2xl font-semibold text-gray-900 dark:text-white;
+    }
+    
+    p {
+        @apply text-red-500;
+    }
+*/
+
 @import "tailwindcss/components";
+/* 
+    Override component styles here.
+    Example:
+    .btn-custom {
+        @apply bg-blue-500 text-white font-bold py-2 px-4 rounded;
+    }
+*/
+
 @import "tailwindcss/utilities";
+/* 
+    Add custom utilities here.
+    Example:
+    .text-shadow {
+        text-shadow: 2px 2px #ff0000;
+    }
+*/

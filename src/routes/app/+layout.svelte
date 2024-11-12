@@ -7,30 +7,49 @@
     import { SearchOutline } from 'flowbite-svelte-icons'
     import { browser } from '$app/environment'
     import Navbar from '../../components/Navbar.svelte'
-    import { Spinner } from 'flowbite-svelte'
 
     /** @type {{ avatar: any; name: any; email?: string; } | null} */
     let user = null
-    let loading = false
+    let loading = true
+    const isDev = import.meta.env.MODE === 'development'
 
     auth.subscribe(state => {
         user = state.user
         loading = state.loading
     })
 
-    loading = false;
+    if (isDev && !user) {
+        user = {
+            name: 'Dev User',
+            email: 'dev@example.com',
+            avatar: ''
+        }
+        loading = false
+    }
+
+    $: if (browser && $page.url.pathname && !isDev) {
+        authGuard.requireAuth($page.url.pathname)
+    }
+
+    onMount(() => {
+        if (!isDev) {
+            auth.checkAuth()
+        }
+    })
 </script>
 
 {#if loading}
     <div class="flex justify-center items-center h-screen bg-black">
         <Spinner size="12" class="text-gray-200 animate-spin" />
     </div>
-    {:else}
+{:else if user}
     <div class="min-h-screen text-gray-200">
         <Navbar></Navbar>
-        WTF is this: Its a chemical burn
-        <main class="pt-24 px-4 sm:px-6 lg:px-8">
-            <slot />
+        <main class="pt-4.5">
+            <div style="height: 72px;"></div>
+            <slot></slot>
         </main>
     </div>
+{:else}
+    <h1 class="text-white text-5xl text-center">AUTH ERROR</h1>
 {/if}
