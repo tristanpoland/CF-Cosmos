@@ -23,6 +23,9 @@
 		"vite": "^5.0.3"
 	},
 	"dependencies": {
+		"@carbon/charts-svelte": "^1.22.0",
+		"@carbon/themes": "^11.43.0",
+		"carbon-components": "^11.66.1",
 		"flowbite-svelte": "^0.47.3",
 		"flowbite-svelte-icons": "^2.0.2",
 		"lucide-svelte": "^0.456.0",

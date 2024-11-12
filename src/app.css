@@ -4,11 +4,11 @@
     body {
         @apply bg-neutral-950 text-gray-300;
     }
-    
+
     h1 {
         @apply text-2xl font-semibold text-gray-900 dark:text-white;
     }
-    
+
     p {
         @apply text-red-500;
     }
@@ -31,3 +31,4 @@
         text-shadow: 2px 2px #ff0000;
     }
 */
+@import "https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|IBM+Plex+Sans:400,600&display=swap";

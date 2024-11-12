@@ -4,7 +4,6 @@
     import { auth } from '../../stores/auth'
     import { page } from '$app/stores'
     import { authGuard } from '../../stores/authGuard'
-    import { SearchOutline } from 'flowbite-svelte-icons'
     import { browser } from '$app/environment'
     import Navbar from '../../components/Navbar.svelte'
 

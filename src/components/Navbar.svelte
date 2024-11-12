@@ -23,9 +23,9 @@
     </NavBrand>
 
     <!-- Navigation Links - Now with flex-1 to take up space and justify-center -->
-    <NavUl class="flex-1 flex justify-center items-center mx-4 hidden md:flex">
-        <NavLi href="/app">Home</NavLi>
-        <NavLi href="/about">About</NavLi>
+    <NavUl class="flex-1 flex flex-row justify-center items-center mx-4 hidden md:flex">
+        <NavLi href="/app">Dashboard</NavLi>
+        <NavLi href="/app/applications">Appliactions</NavLi>
         <NavLi href="/docs">Docs</NavLi>
     </NavUl>
 
