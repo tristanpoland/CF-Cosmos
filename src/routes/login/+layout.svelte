@@ -1,9 +1,9 @@
 <script>
-    import '../app.css'
+    import '../../app.css'
     import { onMount } from 'svelte'
-    import { auth } from '../stores/auth'
+    import { auth } from '../../stores/auth'
     import { page } from '$app/stores'
-    import { authGuard } from '../stores/authGuard'
+    import { authGuard } from '../../stores/authGuard'
     import { Navbar, NavBrand, NavHamburger, NavUl, NavLi, Dropdown, DropdownItem, Avatar, Spinner, Button, Input } from 'flowbite-svelte'
     import { SearchOutline } from 'flowbite-svelte-icons'
     import { browser } from '$app/environment'

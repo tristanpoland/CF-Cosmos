@@ -302,9 +302,10 @@
                     <Heart class="h-5 w-5 text-red-500" />
                     <span>and</span>
                     <Coffee class="h-5 w-5 text-yellow-500" />
+                    <span>by Tristan J. Poland</span>
                 </div>
                 <p class="mt-2 text-xs text-gray-400">
-                    © {new Date().getFullYear()} Cosmos Web UI for Cloud Foundry. All rights reserved.
+                    © {new Date().getFullYear()} Cosmos Web UI for Cloud Foundry. Licensed under Apache 2.0.
                 </p>
             </div>
         </div>

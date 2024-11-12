@@ -44,7 +44,7 @@
     </div>
 {:else if user}
     <div class="min-h-screen text-gray-200">
-        <Navbar class="fixed w-full z-20 bg-opacity-90 bg-black backdrop-blur-lg shadow-lg">
+        <Navbar class="fixed w-full z-20 bg-opacity-30 bg-black backdrop-blur-lg shadow-lg">
             <!-- Brand -->
             <NavBrand href="/" class="flex items-center">
                 <img src="/cflogo.png" class="mr-3 h-8 sm:h-10" alt="CF Logo" />
@@ -96,8 +96,9 @@
                 <NavHamburger class="md:hidden text-white hover:text-gray-300" />
             </div>
         </Navbar>
-        <main class="pt-24 px-4 sm:px-6 lg:px-8">
-            <slot />
+        <main class="pt-4.5">
+            <div style="height: 72px;"></div>
+            <slot></slot>
         </main>
     </div>
 {:else}

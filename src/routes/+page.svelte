@@ -8,7 +8,24 @@
     let error = null;
     let recentApps = [];
     let events = [];
-    
+    // Generate mock events
+    function generateMockEvents() {
+        const eventTypes = ['audit.app.create', 'audit.app.update', 'audit.app.delete', 'audit.service.bind', 'audit.service.unbind'];
+        const targetTypes = ['app', 'service'];
+
+        for (let i = 1; i <= 50; i++) {
+            events.push({
+                type: eventTypes[Math.floor(Math.random() * eventTypes.length)],
+                target: {
+                    name: `Target ${i}`,
+                    type: targetTypes[Math.floor(Math.random() * targetTypes.length)]
+                },
+                created_at: new Date(Date.now() - Math.floor(Math.random() * 1000000000)).toISOString()
+            });
+        }
+    }
+
+    generateMockEvents();
     /** @type {Array<{name: string, state: string, updated_at: string, lifecycle: {data: {stack: string}}}>} */
     let mockApps = [];
     
@@ -31,9 +48,17 @@
     
     let stats = {
         apps: { total: mockApps.length, running: mockApps.filter(app => app.state === 'STARTED').length, crashed: mockApps.filter(app => app.state === 'CRASHED').length },
-        services: { total: 0, bound: 0 },
-        memory: { used_gb: 0, total_gb: 0, used_percentage: 0 },
-        instances: { total: 0, running: 0, crashed: 0 }
+        services: { total: Math.floor(Math.random() * 100), bound: Math.floor(Math.random() * 50) },
+        memory: { 
+            used_gb: Math.floor(Math.random() * 100), 
+            total_gb: 100, 
+            used_percentage: Math.floor(Math.random() * 100) 
+        },
+        instances: { 
+            total: Math.floor(Math.random() * 500), 
+            running: Math.floor(Math.random() * 300), 
+            crashed: Math.floor(Math.random() * 50) 
+        }
     };
     
     async function loadDashboardData() {
@@ -99,7 +124,7 @@
 
 <!-- Page code: -->
 
-<div class="space-y-6 min-h-screen bg-neutral-950 text-gray-300">
+<div class="space-y-6 min-h-screen bg-neutral-950 text-gray-300 p-6">
     <!-- Handle Loading Screen -->
     {#if loading}
         <div class="flex justify-center py-8">
@@ -179,7 +204,7 @@
             </div>
 
             <!-- Activity Feed -->
-            <div class="rounded-lg shadow-lg bg-neutral-900">
+            <div class="rounded-lg shadow-lg bg-neutral-900 h-fit">
                 <div class="px-6 py-4 border-b border-gray-700">
                     <h2 class="text-lg font-semibold text-white">Recent Activity</h2>
                 </div>
