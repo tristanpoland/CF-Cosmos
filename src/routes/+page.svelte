@@ -1,6 +1,8 @@
 <script>
     import { onMount } from 'svelte';
-    import { Cloud, Database, Server, Activity, Plus, Loader2 } from 'lucide-svelte';
+    import { Cloud, Database, Server, Activity, Loader2 } from 'lucide-svelte';
+
+    onMount(loadDashboardData);
 
     let loading = true;
     let error = null;
@@ -13,20 +15,25 @@
     let recentApps = [];
     let events = [];
     
-    const mockApps = [
-        {
-            guid: '1',
-            name: 'test-app',
-            state: 'STARTED',
-            updated_at: new Date().toISOString(),
-            lifecycle: {
-                data: {
-                    stack: 'cflinuxfs4'
-                }
-            }
-        }
-    ];
+    let mockApps = [];
 
+    function populateMockApps() {
+        for (let i = 2; i <= 500; i++) {
+            mockApps.push({
+                name: "CF App "+i.toString(),
+                state: i % 3 === 0 ? 'CRASHED' : i % 2 === 0 ? 'STOPPED' : 'STARTED',
+                updated_at: new Date().toISOString(),
+                lifecycle: {
+                    data: {
+                        stack: 'cflinuxfs4'
+                    }
+                }
+            });
+        }
+    }
+
+    populateMockApps();
+    
     async function loadDashboardData() {
         try {
             recentApps = mockApps;
@@ -39,21 +46,22 @@
         }
     }
 
-    function getStateColor(state) {
-        switch (state) {
-            case 'STARTED': return 'text-green-400 bg-green-800';
-            case 'STOPPED': return 'text-gray-400 bg-gray-800';
-            case 'CRASHED': return 'text-red-400 bg-red-800';
-            default: return 'text-blue-400 bg-blue-800';
-        }
-    }
+    const stateColors = {
+        STARTED: 'text-green-400 bg-green-800',
+        STOPPED: 'text-gray-400 bg-gray-800',
+        CRASHED: 'text-red-400 bg-red-800',
+        DEFAULT: 'text-blue-400 bg-blue-800'
+    };
 
-    function formatEventType(type) {
+    function getStateColor(state) {
+        return stateColors[state] || stateColors.DEFAULT;
+    }
+    function formatEventType(type) {    
         return type
-            ?.replace('audit.', '')
-            ?.split('.')
-            ?.map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            ?.join(' ') || 'Unknown Event';
+            .replace('audit.', '')
+            .split('.')
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ') || 'Unknown Event';
     }
 
     const statsCards = [
