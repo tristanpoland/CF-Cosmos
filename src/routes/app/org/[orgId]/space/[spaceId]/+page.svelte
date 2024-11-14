@@ -212,7 +212,7 @@
                             />
                         </td>
                         <td class="p-4">
-                            <a href="./applications/{app.guid}" class="text-white hover:text-blue-400">
+                            <a href="./{spaceId}/app/{app.guid}" class="text-white hover:text-blue-400">
                                 {app.name}
                             </a>
                             <div class="text-sm text-gray-400">{app.buildpack}</div>

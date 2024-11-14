@@ -1,17 +1,15 @@
 <script lang="ts">
     import { Server, Plus } from 'lucide-svelte';
     import { page } from '$app/stores';
-    import Instances from './Instances.svelte';    
-    import EnvVariables from './EnvVariables.svelte';
-    import LogStream from './LogStream.svelte';
-    import Routes from './Routes.svelte';
+    import Console from './Console.svelte';
+    import Sidecars from './Sidecars.svelte';
     import { get } from 'svelte/store';
     import { onMount, onDestroy } from 'svelte';
    
     const { orgId, spaceId } = get(page).params;
-    let activeTab = 'instances';
+    let activeTab = 'Sidecars';
 
-    const tabs = ['instances', 'env-variables', 'log-stream', 'routes'];
+    const tabs = ['Sidecars', 'console'];
 
     function handleKeydown(event: KeyboardEvent) {
         // Check if a number key 1-5 is pressed and no modifiers are active
@@ -60,14 +58,10 @@
 
     <!-- Tab Content -->
     <div class="py-4">
-        {#if activeTab === 'instances'}
-            <Instances />
-        {:else if activeTab === 'env-variables'}
-            <EnvVariables />
-        {:else if activeTab === 'log-stream'}
-            <LogStream />
-        {:else if activeTab === 'routes'}
-            <Routes />
+        {#if activeTab === 'Sidecars'}
+            <Sidecars />
+        {:else if activeTab === 'console'}
+            <Console />
         {/if}
     </div>
 </div>

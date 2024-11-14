@@ -1,23 +1,15 @@
 <script>
-    import { MoreVertical, Play, Square, RefreshCw, Trash2, Terminal, List, File, Settings } from 'lucide-svelte';
-    import { page } from '$app/stores';
-
+    import { MoreVertical, Play, Square, RefreshCw, Trash2, Terminal, Settings } from 'lucide-svelte';
     
-    $: spaceId = $page.params.spaceId;
-    $: appId = $page.params.appId;
-    
-    export let app;
+    export let instance;
     let isOpen = false;
     
     const menuItems = [
-      { icon: Play, label: 'Start All', action: () => console.log('Start', app.guid) },
-      { icon: Square, label: 'Stop All', action: () => console.log('Stop', app.guid) },
-      { icon: RefreshCw, label: 'Restart All', action: () => console.log('Restart', app.guid) },
-      { icon: Terminal, label: 'Routes', action: () => console.log('Edit Routes', app.guid) },
-      { icon: List, label: 'Variables', action: () => console.log('Variables', app.guid) },
-      { icon: File, label: 'Log Stream', action: () => console.log('Log Stream', app.guid) },
-      { icon: Settings, label: 'Scale Config', action: () => window.location.href = `/app/org/${app.org_guid}/space/${spaceId}/app/${appId}/scale` },
-      { icon: Trash2, label: 'Delete App', action: () => console.log('Delete', app.guid) },
+      { icon: Play, label: 'Start', action: () => console.log('Start', app.guid) },
+      { icon: Square, label: 'Stop', action: () => console.log('Stop', app.guid) },
+      { icon: RefreshCw, label: 'Restart', action: () => console.log('Restart', app.guid) },
+      { icon: Terminal, label: 'SSH Console', action: () => console.log('SSH', app.guid) },
+      { icon: Trash2, label: 'Delete', action: () => console.log('Delete', app.guid) },
     ];
   
     function handleClickOutside(event) {
