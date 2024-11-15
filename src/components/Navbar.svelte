@@ -24,8 +24,7 @@
 
     <ul class="flex-1 flex justify-center space-x-8 items-center mx-4 hidden md:flex">
         <li><a href="/app">Dashboard</a></li>
-        <li><a href="/app/orgs/">Select Org</a></li>
-        <li><a href="/app/applications">All Applications</a></li>
+        <li><a href="/app/orgs/">Orgs</a></li>
         <li><a href="/docs">Docs</a></li>
     </ul>
     

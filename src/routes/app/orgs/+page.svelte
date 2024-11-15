@@ -96,10 +96,16 @@
 <div class="space-y-6 min-h-screen bg-neutral-950 text-gray-300 p-6">
     <!-- Header -->
     <div class="flex justify-between items-center">
-        <div class="flex items-center space-x-3">
-            <Building2 class="w-6 h-6 text-blue-400" />
-            <h1 class="text-2xl font-semibold text-white">Organizations</h1>
-        </div>
+        <div>
+            <div class="text-sm text-gray-400 mb-1">
+                <a href="/app/orgs" class="hover:text-white transition-colors">Organizations</a>
+                <span class="mx-2">/</span>
+            </div>
+            <div class="flex items-center space-x-3">
+                <Building2 class="w-6 h-6 text-blue-400" />
+                <h1 class="text-2xl font-semibold text-white">Organizations</h1>
+            </div>
+        </div>  
         <button 
             on:click={() => showNewOrgModal = true}
             class="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
