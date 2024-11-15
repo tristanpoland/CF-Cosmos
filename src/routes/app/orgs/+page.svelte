@@ -2,6 +2,7 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import { Building2, Plus, Users, Cloud } from 'lucide-svelte';
+    import DynamicFormModal from '../../../components/FormModal.svelte';
     
     // Mock data - replace with store/API
     let organizations = [
@@ -25,8 +26,71 @@
         }
     ];
     
-    let loading = false;
-    let error = null;
+    let showNewOrgModal = false;
+
+    // Form configuration for new organization
+    const newOrgFormConfig = {
+        title: 'New Organization',
+        endpoint: '/api/organizations',
+        fields: [
+            {
+                id: 'name',
+                label: 'Organization Name',
+                type: 'text',
+                placeholder: 'Enter organization name',
+                required: true,
+                validations: [
+                    {
+                        rule: (value) => value.length >= 3,
+                        message: 'Organization name must be at least 3 characters'
+                    },
+                    {
+                        rule: (value) => /^[a-zA-Z0-9\s-]+$/.test(value),
+                        message: 'Organization name can only contain letters, numbers, spaces, and hyphens'
+                    }
+                ]
+            },
+            {
+                id: 'memory_quota',
+                label: 'Memory Quota (GB)',
+                type: 'number',
+                required: true,
+                min: 1,
+                max: 100,
+                placeholder: 'Enter memory quota in GB'
+            },
+            {
+                id: 'org_type',
+                label: 'Organization Type',
+                type: 'select',
+                required: true,
+                options: [
+                    { value: 'business', label: 'Business' },
+                    { value: 'nonprofit', label: 'Non-Profit' },
+                    { value: 'education', label: 'Educational' }
+                ]
+            }
+        ]
+    };
+
+    function handleFormSuccess(event: CustomEvent) {
+        const newOrgData = {
+            ...event.detail.data,
+            guid: crypto.randomUUID(),
+            slug: generateSlug(event.detail.data.name),
+            spaces: 0,
+            users: 1,
+            memory_usage: 0
+        };
+        
+        organizations = [...organizations, newOrgData];
+    }
+
+    function generateSlug(name: string): string {
+        return name.toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/(^-|-$)/g, '');
+    }
 </script>
 
 <div class="space-y-6 min-h-screen bg-neutral-950 text-gray-300 p-6">
@@ -36,7 +100,10 @@
             <Building2 class="w-6 h-6 text-blue-400" />
             <h1 class="text-2xl font-semibold text-white">Organizations</h1>
         </div>
-        <button class="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors">
+        <button 
+            on:click={() => showNewOrgModal = true}
+            class="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
+        >
             <Plus class="w-4 h-4" />
             <span>New Organization</span>
         </button>
@@ -99,4 +166,14 @@
             </div>
         {/each}
     </div>
+
+    <!-- Dynamic Form Modal -->
+    <DynamicFormModal
+        show={showNewOrgModal}
+        title={newOrgFormConfig.title}
+        endpoint={newOrgFormConfig.endpoint}
+        fields={newOrgFormConfig.fields}
+        on:close={() => showNewOrgModal = false}
+        on:success={handleFormSuccess}
+    />
 </div>

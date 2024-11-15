@@ -4,7 +4,7 @@
 </script>
 
 <div class="bg-neutral-900 rounded-lg p-4">
-    <div class="h-96 overflow-y-auto mb-4 font-mono">
+    <div class="h-[calc(100vh-400px)]  overflow-y-auto mb-4 font-mono">
         {#each commandHistory as command}
             <div class="py-1">{command}</div>
         {/each}

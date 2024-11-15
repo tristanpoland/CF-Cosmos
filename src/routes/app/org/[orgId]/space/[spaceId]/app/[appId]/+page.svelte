@@ -8,7 +8,7 @@
     import { get } from 'svelte/store';
     import { onMount, onDestroy } from 'svelte';
    
-    const { orgId, spaceId } = get(page).params;
+    const { orgId, spaceId, appId } = get(page).params;
     let activeTab = 'instances';
 
     const tabs = ['instances', 'env-variables', 'log-stream', 'routes'];
@@ -38,8 +38,20 @@
 
 <div class="space-y-6 min-h-screen bg-neutral-950 text-gray-300 p-6">
     <!-- Header -->
-    <div class="flex justify-between items-center">
-        <!-- ... header content ... -->
+    <div class="flex justify-between items-center mb-6">
+        <div class="text-sm text-gray-400">
+            <a href="/app/orgs" class="hover:text-white transition-colors">Organizations /</a>
+            <a href="/app/org/{orgId}" class="hover:text-white transition-colors">{orgId}</a>
+            <span class="mx-0">/ space /</span>
+            <a href="/app/org/{orgId}/space/{spaceId}" class="hover:text-white transition-colors">{spaceId}</a>
+            <span class="mx-0">/ app /</span>
+            <a href="/app/org/{orgId}/space/{spaceId}/app/{appId}" class="hover:text-white transition-colors">{appId}</a>
+            <span class="mx-0">/</span>
+            <div class="flex items-center space-x-3 pt-5">
+                <Server class="w-6 h-6 text-blue-400" />
+                <h1 class="text-2xl font-semibold text-white">Instances of app {appId}</h1>
+            </div>
+        </div>
     </div>
 
     <!-- Tabs -->

@@ -97,7 +97,7 @@
                     <div class="mt-6 flex space-x-3">
                         <a href="./space/{space.guid}/">
                             <button class="flex-1 px-3 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors">
-                                View Applications
+                                Dashboard
                             </button>
                         </a>
                         <button class="px-3 py-2 bg-neutral-800 hover:bg-neutral-700 rounded-lg transition-colors">
