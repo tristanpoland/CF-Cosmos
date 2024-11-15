@@ -3,8 +3,6 @@
     import {
         Navbar,
         NavBrand,
-        NavUl,
-        NavLi,
         Button,
         Input,
         Dropdown,
